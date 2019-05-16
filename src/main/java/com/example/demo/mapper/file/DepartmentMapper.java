@@ -1,4 +1,4 @@
-package com.example.demo.mapper;
+package com.example.demo.mapper.file;
 
 import java.util.List;
 
@@ -13,29 +13,31 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.domain.Department;
 import com.example.demo.domain.StateEntity;
+
 //@Repository
-//@Mapper
-public interface StateMapper {
-	@Select("SELECT * FROM states")
+@Mapper
+public interface DepartmentMapper {
+	@Select("SELECT * FROM department")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
-	List<StateEntity> getAll();
+	List<Department> getAll();
 	
-	@Select("SELECT * FROM states WHERE id = #{id}")
+	@Select("SELECT * FROM department WHERE id = #{id}")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
-	StateEntity getOne(String id);
+	Department getOne(String id);
  
-	@Insert("INSERT INTO states(state,population) VALUES(#{state}, #{population})")
-	void insert(StateEntity state);
+	@Insert("INSERT INTO department(state,population) VALUES(#{state}, #{population})")
+	void insert(Department state);
  
 	@Update("UPDATE states SET state=#{state},population=#{population} WHERE id =#{id}")
-	void update(StateEntity state);
+	void update(Department state);
  
 	@Delete("DELETE FROM states WHERE id =#{id}")
 	void delete(String id);

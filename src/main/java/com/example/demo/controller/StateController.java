@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.StateEntity;
-import com.example.demo.mapper.StateMapper;
+import com.example.demo.mapper.file.StateMapper;
 
 @RestController
 //@RequestMapping()

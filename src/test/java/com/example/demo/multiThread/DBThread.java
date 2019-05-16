@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.domain.StateEntity;
-import com.example.demo.mapper.StateMapper;
+import com.example.demo.mapper.file.StateMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

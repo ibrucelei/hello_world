@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Department;
-import com.example.demo.mapper.DepartmentMapper;
+import com.example.demo.mapper.file.DepartmentMapper;
 
 @RestController
 @RequestMapping()
