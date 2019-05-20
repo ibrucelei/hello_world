@@ -1,4 +1,4 @@
-package config;
+package com.example.demo.config;
 
 import javax.sql.DataSource;
 
@@ -57,6 +57,7 @@ public class TestDataSourceConfiguration {
     @ConfigurationProperties(prefix = "spring.datasource.test")
     @Primary
     public DataSource testDataSource() {
+		System.out.println("testDataSource");
         return DataSourceBuilder.create().build();
     }
 
