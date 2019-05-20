@@ -12,39 +12,18 @@ import com.example.demo.domain.StateEntity;
 import com.example.demo.mapper.file.StateMapper;
 
 @RestController
-//@RequestMapping()
+@RequestMapping("/state")
 public class StateController {
 	@Autowired
 	private StateMapper stateMapper;
-	private static String lock="";
-	@RequestMapping("/getStates")
-	public List<StateEntity> getUsers() {
+	@RequestMapping("/get")
+	public List<StateEntity> getState() {
 		List<StateEntity> users=stateMapper.getAll();
-		CountDownLatch cdl=new CountDownLatch(10);
-		for(int i=0;i<cdl.getCount();i++){
-			new Thread(){
-				@Override
-				public void run() {
-					System.out.println("开始创建:"+this.getName());
-					System.out.println(this.getName()+"：创建结束");
-					synchronized(lock){
-						StateEntity entity=stateMapper.getOne("1");
-						entity.setPopulation(entity.getPopulation()+1);
-						stateMapper.update(entity);
-						System.out.println(this.getName()+"：添加结束！");
-					}
-					cdl.countDown();
-					
-				}
-			}.start();;
-		}
-		try {
-			cdl.await();
-			System.out.println("await结束");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	
 		return users;
+	}
+	@RequestMapping("/add")
+	public int add(StateEntity state) {
+		int result=stateMapper.insert(state);
+		return result;
 	}
 }

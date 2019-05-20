@@ -17,27 +17,27 @@ import com.example.demo.domain.StateEntity;
 //@Repository
 @Mapper
 public interface StateMapper {
-	@Select("SELECT * FROM states")
+	@Select("SELECT * FROM state")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
 	List<StateEntity> getAll();
 	
-	@Select("SELECT * FROM states WHERE id = #{id}")
+	@Select("SELECT * FROM state WHERE id = #{id}")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
 	StateEntity getOne(String id);
  
-	@Insert("INSERT INTO states(state,population) VALUES(#{state}, #{population})")
-	void insert(StateEntity state);
+	@Insert("INSERT INTO state(state,population) VALUES(#{state}, #{population})")
+	int insert(StateEntity state);
  
-	@Update("UPDATE states SET state=#{state},population=#{population} WHERE id =#{id}")
-	void update(StateEntity state);
+	@Update("UPDATE state SET state=#{state},population=#{population} WHERE id =#{id}")
+	int update(StateEntity state);
  
-	@Delete("DELETE FROM states WHERE id =#{id}")
-	void delete(String id);
+	@Delete("DELETE FROM state WHERE id =#{id}")
+	int delete(String id);
 
 }

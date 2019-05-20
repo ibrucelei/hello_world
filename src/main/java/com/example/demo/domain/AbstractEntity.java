@@ -4,6 +4,8 @@
 package com.example.demo.domain;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -14,13 +16,15 @@ import javax.persistence.Id;
 public abstract class AbstractEntity {
 	@Id
 	@GeneratedValue
-	private int id;
+	private String id;
+	@Column(name="create_date")
 	private Date createDate;
+	@Column(name="modify_date")
 	private Date modifyDate;
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Date getCreateDate() {

@@ -1,4 +1,4 @@
-package com.example.demo.mapper.file;
+package com.example.demo.mapper.test;
 
 import java.util.List;
 
@@ -33,13 +33,13 @@ public interface DepartmentMapper {
 	})
 	Department getOne(String id);
  
-	@Insert("INSERT INTO department(state,population) VALUES(#{state}, #{population})")
-	void insert(Department state);
+	@Insert("INSERT INTO department(name,employer_id) VALUES(#{name}, #{employer_id})")
+	int insert(Department state);
  
-	@Update("UPDATE states SET state=#{state},population=#{population} WHERE id =#{id}")
-	void update(Department state);
+	@Update("UPDATE states SET name=#{name},population=#{employer_id} WHERE id =#{id}")
+	int update(Department state);
  
 	@Delete("DELETE FROM states WHERE id =#{id}")
-	void delete(String id);
+	int delete(String id);
 
 }

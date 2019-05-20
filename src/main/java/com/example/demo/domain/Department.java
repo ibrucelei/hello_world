@@ -3,6 +3,7 @@
  */
 package com.example.demo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 
 /**
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 public class Department extends AbstractEntity {
 
 	private String name;
+	@Column(name="employer_id")
+	private String employerId;
 	private Employer employer;
 	public String getName() {
 		return name;
@@ -26,5 +29,12 @@ public class Department extends AbstractEntity {
 	public void setEmployer(Employer employer) {
 		this.employer = employer;
 	}
+	public String getEmployerId() {
+		return employerId;
+	}
+	public void setEmployerId(String employerId) {
+		this.employerId = employerId;
+	}
+	
 	
 }
