@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.StateEntity;
-//@Repository
 @Mapper
 public interface StateMapper {
 	@Select("SELECT * FROM state")
@@ -31,10 +31,12 @@ public interface StateMapper {
 	})
 	StateEntity getOne(String id);
  
-	@Insert("INSERT INTO state(state,population) VALUES(#{state}, #{population})")
+	@SelectKey(keyProperty = "id",resultType = String.class, before = true,
+            statement = "select replace(uuid(), '-', '')")
+	@Insert("INSERT INTO state(id,state,population) VALUES(#{id},#{state}, #{population})")
 	int insert(StateEntity state);
  
-	@Update("UPDATE state SET state=#{state},population=#{population} WHERE id =#{id}")
+	@Update("UPDATE state SET state=#{state.state},population=#{state.population} WHERE id =#{state.id}")
 	int update(StateEntity state);
  
 	@Delete("DELETE FROM state WHERE id =#{id}")
