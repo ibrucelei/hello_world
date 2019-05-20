@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.domain.Department;
 import com.example.demo.domain.StateEntity;
 
-//@Repository
 @Mapper
 public interface DepartmentMapper {
 	@Select("SELECT * FROM department")
@@ -33,11 +33,13 @@ public interface DepartmentMapper {
 	})
 	Department getOne(String id);
  
-	@Insert("INSERT INTO department(name,employer_id) VALUES(#{name}, #{employer_id})")
-	int insert(Department state);
+	@SelectKey(keyProperty = "id",resultType = String.class, before = true,
+            statement = "select replace(uuid(), '-', '')")
+	@Insert("INSERT INTO department(id,name,employer_id) VALUES(#{id},#{name}, #{employerId})")
+	int insert(Department department);
  
-	@Update("UPDATE states SET name=#{name},population=#{employer_id} WHERE id =#{id}")
-	int update(Department state);
+	@Update("UPDATE states SET name=#{name},population=#{employerId} WHERE id =#{id}")
+	int update(Department department);
  
 	@Delete("DELETE FROM states WHERE id =#{id}")
 	int delete(String id);
