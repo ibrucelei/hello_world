@@ -16,7 +16,7 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentMapper departmentMapper;
 	@RequestMapping("/add")
-	public int add(@RequestParam Department department ) {
+	public int add( Department department ) {//@RequestParam
 		int result=departmentMapper.insert(department);
 		return result;
 	}

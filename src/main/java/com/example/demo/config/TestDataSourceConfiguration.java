@@ -16,54 +16,22 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
-//这个注解导入刚才增加的jdbc配置文件
-//@PropertySource("classpath:application.properties")
-@MapperScan(basePackages = "com.example.demo.mapper.test")//, sqlSessionTemplateRef  = "testSqlSessionTemplate")
+@MapperScan(basePackages = "com.example.demo.mapper.test", sqlSessionFactoryRef="testSqlSessionFactory",sqlSessionTemplateRef  = "testSqlSessionTemplate")
 //@EnableJpaRepositories(
 		//entityManagerFactoryRef="entityManagerFactoryPrimary", 
 		//transactionManagerRef="transactionManagerPrimary", 		basePackages = {"com.example.demo.mapper.test"} )
 public class TestDataSourceConfiguration {
-	/*@Value("${spring.datasource.driverClassName}")
-    private String driver;
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
-    @Value("${jdbc.maxActive}")
-    private int maxActive;
-    @Value("${jdbc.maxIdel}")
-    private int maxIdel;
-    @Value("${jdbc.maxWait}")
-    private long maxWait;
-
-    
-    @Bean
-    public BasicDataSource dataSource(){
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setMaxActive(maxActive);
-        dataSource.setMaxIdle(maxIdel);
-        dataSource.setMaxWait(maxWait);
-        dataSource.setValidationQuery("SELECT 1");
-        dataSource.setTestOnBorrow(true);
-        return dataSource;
-    }*/
 	@Bean(name = "testDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.test")
     @Primary
-    public DataSource testDataSource() {
-		System.out.println("testDataSource");
+    public DataSource DataSource() {
+		//System.out.println("testDataSource");
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "testSqlSessionFactory")
     @Primary
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("testDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory SqlSessionFactory(@Qualifier("testDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         return bean.getObject();
@@ -71,13 +39,13 @@ public class TestDataSourceConfiguration {
 
     @Bean(name = "testTransactionManager")
     @Primary
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("testDataSource") DataSource dataSource) {
+    public DataSourceTransactionManager TransactionManager(@Qualifier("testDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "testSqlSessionTemplate")
     @Primary
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("testSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate SqlSessionTemplate(@Qualifier("testSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 	

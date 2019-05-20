@@ -15,33 +15,33 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
-@MapperScan(basePackages = "com.example.demo.mapper.file")//, sqlSessionTemplateRef  = "fileSqlSessionTemplate")
+@MapperScan(basePackages = "com.example.demo.mapper.file",sqlSessionFactoryRef="fileSqlSessionFactory", sqlSessionTemplateRef  = "fileSqlSessionTemplate")
 //@EnableJpaRepositories(
 		//entityManagerFactoryRef="entityManagerFactoryPrimary", 
 		//transactionManagerRef="transactionManagerPrimary", basePackages = {"com.example.demo.mapper.file"} )
 public class FileDataSourceConfiguration {
 	@Bean(name = "fileDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.file")
-    @Primary
-    public DataSource testDataSource() {
+    public DataSource DataSource() {
 		//System.out.println("testDataSource");
         return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "fileSqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("fileDataSource") DataSource dataSource) throws Exception {
+    public SqlSessionFactory SqlSessionFactory(@Qualifier("fileDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+        //bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("com.example.demo.mapper.file"));
         return bean.getObject();
     }
 
     @Bean(name = "fileTransactionManager")
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("fileDataSource") DataSource dataSource) {
+    public DataSourceTransactionManager TransactionManager(@Qualifier("fileDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "fileSqlSessionTemplate")
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("fileSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    public SqlSessionTemplate SqlSessionTemplate(@Qualifier("fileSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 	
