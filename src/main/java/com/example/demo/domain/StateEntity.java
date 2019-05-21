@@ -1,8 +1,14 @@
 package com.example.demo.domain;
+import java.io.Serializable;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 //@Table(name = "states")
-public class StateEntity extends AbstractEntity{
+public class StateEntity extends AbstractEntity implements Serializable{
+	/**
+	 * 为了mybatis二级缓存
+	 */
+	private static final long serialVersionUID = 1L;
 	private String state;
 	private int population;
 	public String getState() {
