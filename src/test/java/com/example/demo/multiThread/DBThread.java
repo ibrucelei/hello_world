@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.demo.domain.StateEntity;
+import com.example.demo.domain.State;
 import com.example.demo.mapper.file.StateMapper;
 
 @RunWith(SpringRunner.class)
@@ -36,7 +36,7 @@ public class DBThread {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					StateEntity entity=stateMapper.getOne("1");
+					com.example.demo.domain.State entity=stateMapper.getOne("1");
 					entity.setPopulation(entity.getPopulation()+1);
 					stateMapper.update(entity);
 					System.out.println(this.getName()+"：添加结束！");
