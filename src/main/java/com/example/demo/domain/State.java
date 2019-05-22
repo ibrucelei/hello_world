@@ -1,10 +1,7 @@
 package com.example.demo.domain;
 import java.io.Serializable;
-
-import javax.persistence.Id;
-import javax.persistence.Table;
 //@Table(name = "states")
-public class StateEntity extends AbstractEntity implements Serializable{
+public class State extends AbstractEntity implements Serializable{
 	/**
 	 * 为了mybatis二级缓存
 	 */
