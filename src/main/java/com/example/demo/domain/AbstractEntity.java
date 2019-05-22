@@ -3,6 +3,7 @@
  */
 package com.example.demo.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,11 @@ import javax.persistence.Id;
  * @author Administrator
  * 抽象基础实体类
  */
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable  {
+	/**
+	 * 为了实现缓存。
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private String id;

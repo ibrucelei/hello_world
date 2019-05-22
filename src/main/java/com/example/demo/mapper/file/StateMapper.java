@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
-import com.example.demo.domain.StateEntity;
+import com.example.demo.domain.State;
 @Mapper
 @CacheNamespace
 public interface StateMapper {
@@ -20,24 +20,25 @@ public interface StateMapper {
 		//@Result(property = "nickName", column = "nick_name")
 	})
 	
-	List<StateEntity> getAll();
+	List<State> getAll();
 	
 	@Select("SELECT * FROM state WHERE id = #{id}")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
-	StateEntity getOne(String id);
+	State getOne(String id);
  
 	@SelectKey(keyProperty = "id",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
 	@Insert("INSERT INTO state(id,state,population) VALUES(#{id},#{state}, #{population})")
-	int insert(StateEntity state);
+	int insert(State state);
  
 	@Update("UPDATE state SET state=#{state.state},population=#{state.population} WHERE id =#{state.id}")
-	int update(StateEntity state);
+	int update(State state);
  
 	@Delete("DELETE FROM state WHERE id =#{id}")
 	int delete(String id);
 
+	
 }

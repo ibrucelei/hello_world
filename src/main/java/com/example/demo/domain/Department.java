@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
  */
 public class Department extends AbstractEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	@Column(name="employer_id")
 	private String employerId;

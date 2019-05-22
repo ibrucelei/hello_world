@@ -15,18 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Department;
-import com.example.demo.domain.StateEntity;
+import com.example.demo.domain.State;
 
 @Mapper
 public interface DepartmentMapper {
-	@Select("SELECT * FROM department")
+	@Select("SELECT id,employer_id employerId,create_date createDate,modify_date modifyDate FROM department")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
 	List<Department> getAll();
 	
-	@Select("SELECT * FROM department WHERE id = #{id}")
+	@Select("SELECT id,employer_id employerId,create_date createDate,modify_date modifyDate  FROM department WHERE id = #{id}")
 	@Results({
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")

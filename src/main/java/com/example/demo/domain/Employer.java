@@ -8,6 +8,10 @@ package com.example.demo.domain;
  * department ：employer=n:1
  */
 public class Employer extends AbstractEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String gender;
 	public String getName() {
