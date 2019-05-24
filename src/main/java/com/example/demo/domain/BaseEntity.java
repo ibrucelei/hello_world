@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.example.demo.domain;
 
 import java.io.Serializable;
@@ -12,9 +9,9 @@ import javax.persistence.Id;
 
 /**
  * @author Administrator
- * 抽象基础实体类
+ * 基础实体类
  */
-public abstract class AbstractEntity implements Serializable  {
+public class BaseEntity implements Serializable  {
 	/**
 	 * 为了实现缓存。
 	 */
@@ -26,6 +23,10 @@ public abstract class AbstractEntity implements Serializable  {
 	private Date createDate;
 	@Column(name="modify_date")
 	private Date modifyDate;
+	/**
+	 * 所有状态值默认是0,如果是多个值,以逗号隔开。
+	 */
+	private int status;
 	public String getId() {
 		return id;
 	}
@@ -43,6 +44,12 @@ public abstract class AbstractEntity implements Serializable  {
 	}
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

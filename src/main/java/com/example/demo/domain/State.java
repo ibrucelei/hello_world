@@ -1,7 +1,7 @@
 package com.example.demo.domain;
 import java.io.Serializable;
 //@Table(name = "states")
-public class State extends AbstractEntity implements Serializable{
+public class State extends BaseEntity implements Serializable{
 	/**
 	 * 为了mybatis二级缓存
 	 */

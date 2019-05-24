@@ -2,7 +2,7 @@ package com.example.demo.domain;
 
 import javax.persistence.Column;
 
-public class Role extends AbstractEntity {
+public class Role extends BaseEntity {
 	/**
 	 * 
 	 */

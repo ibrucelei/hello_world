@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
  * @author Administrator
  *
  */
-public class Department extends AbstractEntity {
+public class Department extends BaseEntity {
 
 	/**
 	 * 

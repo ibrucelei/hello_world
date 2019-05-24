@@ -7,7 +7,7 @@ package com.example.demo.domain;
  * @author Administrator
  * department ：employer=n:1
  */
-public class Employer extends AbstractEntity{
+public class Employer extends BaseEntity{
 	/**
 	 * 
 	 */
