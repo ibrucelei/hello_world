@@ -1,7 +1,6 @@
 package com.example.demo.domain;
 
 import javax.persistence.Column;
-
 public class User  extends BaseEntity {
 	/**
 	 * 
@@ -48,6 +47,4 @@ public class User  extends BaseEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }
