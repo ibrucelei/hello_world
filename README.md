@@ -34,4 +34,5 @@
 ## bug
 - [ ] 认证decide方法中抛出的异常未显示到页面。
 ## ToDo
-- [ ] label和category尚未定义
+- [ ] label和category尚未定义，thymeleaf_select  https://www.cnblogs.com/hfultrastrong/p/9186952.html
+- [ ] 引入bootstrap
