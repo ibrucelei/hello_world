@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+    </head>
+    <script type="text/javascript">
+    	function init(){
+    		
+    	}
+    </script>
+    <body>
+        <h1 th:inline="text" th:text="'Hello, ' + ${userName} + '!'">Hello</h1>
+        <form th:action="@{/media/add}" enctype="multipart/form-data" method="post">
+        	请选择文件:<input type="file" name="file" value=""/>
+        	<input type="hidden" name="userId" th:value="${userId}"/>
+        	描述:<input type="text" name="description" value=""/>
+        	标题:<input type="text" name="title" value=""/>
+        	名称<input type="text" name="name" value=""/>
+        	标签<input type="checkbox" name="labelId" value=""/>
+        	分类<input type="checkbox" name="categoryId" value=""/>
+            <input type="submit" value="提交"/>
+        </form>
+    </body>
+</html>

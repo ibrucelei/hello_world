@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import javax.persistence.Column;
+
 /**
  * @author Administrator
  * 所有页面实体，包括文章，文件。
@@ -15,10 +17,12 @@ public class Media extends BaseEntity{
 	 */
 	private String path;
 	/**
-	 * 类型 file,article,video,audio
+	 * 类型 file.doc/pdf/video/audio..,article
 	 */
-	private String type;
+	@Column(name="content_type")
+	private String contentType;
 	private String content;
+	@Column(name="user_id")
 	private String userId;
 	private String description;
 	/**
@@ -26,12 +30,14 @@ public class Media extends BaseEntity{
 	 */
 	private String title;
 	/**
-	 * 分类
+	 * 分类,单选
 	 */
+	@Column(name="category_id")
 	private String categoryId;
 	/**
-	 * 标签，以逗号隔开。
+	 * description:标签，以逗号隔开。多选
 	 */
+	@Column(name="label_id")
 	private String labelId;
 	/**
 	 * 评论、点赞、收藏、浏览次数
@@ -41,11 +47,11 @@ public class Media extends BaseEntity{
 	private int nStore;
 	private int nBrowse;
 	
-	public String getType() {
-		return type;
+	public String getContentType() {
+		return contentType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 	public String getContent() {
 		return content;
