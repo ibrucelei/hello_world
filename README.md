@@ -33,3 +33,5 @@
 
 ## bug
 - [ ] 认证decide方法中抛出的异常未显示到页面。
+## ToDo
+- [ ] label和category尚未定义
