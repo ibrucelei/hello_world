@@ -1,6 +1,8 @@
 package com.example.demo.security;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -11,6 +13,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Component;
 @Component
 public class MyAccessDecisionManager implements AccessDecisionManager {
+	Logger log=LoggerFactory.getLogger(MyAccessDecisionManager.class);
 
 	/**
 	 * 判断标准：该方法只要不抛出异常就算权限验证通过
@@ -21,7 +24,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
 		//获取访问的uri
 		FilterInvocation secureObject = (FilterInvocation)object;
 		String requestURI = secureObject.getHttpRequest().getRequestURI();
-		
+		log.trace(requestURI);
 		//获取访问用户的权限集，并将其转成以,拼接的字符串形式
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		StringBuilder authorityBuilder = new StringBuilder();

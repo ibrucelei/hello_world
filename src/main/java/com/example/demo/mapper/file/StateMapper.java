@@ -10,6 +10,10 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
+
+import com.example.demo.anno.EntityLog;
+import com.example.demo.constant.OperateType;
+import com.example.demo.domain.Media;
 import com.example.demo.domain.State;
 @Mapper
 @CacheNamespace
@@ -19,7 +23,7 @@ public interface StateMapper {
 		//@Result(property = "userSex",  column = "user_sex", javaType = UserSexEnum.class),
 		//@Result(property = "nickName", column = "nick_name")
 	})
-	
+	@EntityLog(desc = "查询全部state", entity = State.class, operateType = OperateType.QUERY)
 	List<State> getAll();
 	
 	@Select("SELECT * FROM state WHERE id = #{id}")

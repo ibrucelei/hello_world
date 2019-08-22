@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.anno.EntityLog;
+import com.example.demo.constant.OperateType;
 import com.example.demo.domain.Media;
 import com.example.demo.domain.User;
 import com.example.demo.mapper.file.MediaMapper;
@@ -31,6 +33,7 @@ public class MediaController {
 	
 	@RequestMapping("/get")
 	@ResponseBody
+	@EntityLog(desc = "查询全部media", entity = Media.class, operateType = OperateType.QUERY)
 	public List<Media> getState() {
 		List<Media> medias=mediaMapper.getAll();
 		return medias;
