@@ -3,8 +3,10 @@ package com.example.demo.aop;
 import java.lang.reflect.Method;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -24,8 +26,8 @@ public class LogAspct {
 	public void entityLogPC() {
 		
 	}
-	@After(value = "entityLogPC()")
-	public void after(JoinPoint joinPoint) {
+	@Around(value = "entityLogPC()")
+	public void after(ProceedingJoinPoint  joinPoint) {
 		Signature signature=joinPoint.getSignature();
 		/*
 		 * String joinPointClassName=joinPoint.getClass().getName(); String
@@ -48,11 +50,16 @@ public class LogAspct {
 			if(method.isAnnotationPresent(EntityLog.class)) {
 				EntityLog entityLog=method.getAnnotation(EntityLog.class);
 				Logger loggerLog=LoggerFactory.getLogger(signatureDeclaringType);
-				loggerLog.info(entityLog.operateType()+" "+entityLog.desc());
+				loggerLog.info(entityLog.operateType()+" "+entityLog.desc()+" begin!--------------------");
+				Object result=joinPoint.proceed();
+				loggerLog.info("result："+result.toString());
+				loggerLog.info(entityLog.operateType()+" "+entityLog.desc()+" end!--------------------");
 			}
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
