@@ -18,24 +18,37 @@ import com.example.demo.anno.EntityLog;
 @Component
 public class LogAspct {
 
+	Logger logger=LoggerFactory.getLogger(LogAspct.class);
+	
 	@Pointcut("@annotation(com.example.demo.anno.EntityLog)")
 	public void entityLogPC() {
 		
 	}
 	@After(value = "entityLogPC()")
 	public void after(JoinPoint joinPoint) {
-		Signature s=joinPoint.getSignature();
-		//Class<?> className=joinPoint.getClass();   不对
-		Class<?> className=s.getClass();// 也不对
-		String methodName=s.getName();
+		Signature signature=joinPoint.getSignature();
+		/*
+		 * String joinPointClassName=joinPoint.getClass().getName(); String
+		 * signatureclassName=signature.getClass().getName();
+		 * logger.info("signatureclassName : "+signatureclassName);
+		 * logger.info("joinPointClassName : "+joinPointClassName); Class<?>
+		 * className=joinPoint.getTarget().getClass();
+		 * logger.info("targetClassName : "+className); String
+		 * thisName=joinPoint.getThis().getClass().getName();
+		 * logger.info("thisName : "+thisName);
+		 */
+		String methodName=signature.getName();
+		logger.info("methodName : "+methodName);
+		Class<?> signatureDeclaringType=signature.getDeclaringType();
+		logger.info("signatureDeclaringTypeName : "+signatureDeclaringType);
 		@SuppressWarnings("rawtypes")
-		Class[] parameterTypes=((MethodSignature)s).getParameterTypes();
+		Class[] parameterTypes=((MethodSignature)signature).getParameterTypes();
 		try {
-			Method method=className.getMethod(methodName, parameterTypes);
+			Method method=signatureDeclaringType.getMethod(methodName, parameterTypes);
 			if(method.isAnnotationPresent(EntityLog.class)) {
 				EntityLog entityLog=method.getAnnotation(EntityLog.class);
-				Logger logger=LoggerFactory.getLogger(entityLog.getClass());
-				logger.info(entityLog.operateType()+" "+entityLog.desc());
+				Logger loggerLog=LoggerFactory.getLogger(signatureDeclaringType);
+				loggerLog.info(entityLog.operateType()+" "+entityLog.desc());
 			}
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
