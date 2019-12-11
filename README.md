@@ -6,6 +6,7 @@
 - [x] 用户认证
 - [ ] 角色权限
 - [x] 缓存
+	mybatis二级缓存
 - [x] 认证例外
 - [ ] 单点登录 redis cookie
 - [ ] maven多项目管理
