@@ -27,7 +27,7 @@ public class LogAspct {
 		
 	}
 	@Around(value = "entityLogPC()")
-	public void after(ProceedingJoinPoint  joinPoint) {
+	public Object around(ProceedingJoinPoint  joinPoint) {
 		Signature signature=joinPoint.getSignature();
 		/*
 		 * String joinPointClassName=joinPoint.getClass().getName(); String
@@ -45,13 +45,15 @@ public class LogAspct {
 		logger.info("signatureDeclaringTypeName : "+signatureDeclaringType);
 		@SuppressWarnings("rawtypes")
 		Class[] parameterTypes=((MethodSignature)signature).getParameterTypes();
+		Object result=null;
 		try {
 			Method method=signatureDeclaringType.getMethod(methodName, parameterTypes);
 			if(method.isAnnotationPresent(EntityLog.class)) {
 				EntityLog entityLog=method.getAnnotation(EntityLog.class);
 				Logger loggerLog=LoggerFactory.getLogger(signatureDeclaringType);
 				loggerLog.info(entityLog.operateType()+" "+entityLog.desc()+" begin!--------------------");
-				Object result=joinPoint.proceed();
+				Object[] args = joinPoint.getArgs();
+				result=joinPoint.proceed(args);
 				loggerLog.info("result："+result.toString());
 				loggerLog.info(entityLog.operateType()+" "+entityLog.desc()+" end!--------------------");
 			}
@@ -62,6 +64,7 @@ public class LogAspct {
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 	
 }

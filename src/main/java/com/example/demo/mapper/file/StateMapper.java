@@ -13,7 +13,6 @@ import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.anno.EntityLog;
 import com.example.demo.constant.OperateType;
-import com.example.demo.domain.Media;
 import com.example.demo.domain.State;
 @Mapper
 @CacheNamespace

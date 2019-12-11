@@ -39,7 +39,7 @@ public class MediaController {
 		return medias;
 	}
 	/**
-	 * remark:上次文件，需要定义path,type,
+	 * remark:上传文件，需要定义path,type,
 	 * type:file.doc/pdf/video/audio...
 	 * @param media
 	 * @param file
